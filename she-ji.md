@@ -22,7 +22,7 @@ description: RGB 设计的主要概念和特性概述
 
 实质上，这就等同于，每次所有权转移的时候，我们都修改原始的合约，指明哪一个新的比特币 UTXO，是最新的所有权控制者。
 
-<figure><img src=".gitbook/assets/bitcoin-based-single-use-seals.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/bitcoin-based-single-use-seals-zh.png" alt=""><figcaption></figcaption></figure>
 
 ### RGB 状态变更
 
@@ -48,7 +48,7 @@ RGB 利用了比特币区块链来**防止重复花费**，而且，这是通过
 
 为了让多次状态转换可以放进一个承诺中，状态转换的内容要被多次聚合：首先，跟某一个合约（或者说资产 ID）相关的所有状态转换，要确定性地聚合（成一个承诺）；然后，所有被转移的资产的承诺，要被聚合成一棵默克尔树，而最终的根哈希值，就是最终的 RGB 承诺。为了保证跟其它无关 RGB、但同样也需要使用确定性比特币承诺的协议的兼容性，RGB 承诺和其它协议的承诺要再一次聚合（如 [LNPBP-4 标准](https://github.com/LNP-BP/LNPBPs/blob/master/lnpbp-0004.md)所述），如此得到的哈希值，才是实际上被嵌入比特币交易中的消息。
 
-<figure><img src=".gitbook/assets/deterministic-bitcoin-commitments.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/deterministic-bitcoin-commitments-zh.png" alt=""><figcaption></figcaption></figure>
 
 在最终的 LNPBP-4 消息就绪之后，有两种办法可以将其承诺到比特币交易中：
 
