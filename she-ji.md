@@ -22,7 +22,7 @@ description: RGB 设计的主要概念和特性概述
 
 实质上，这就等同于，每次所有权转移的时候，我们都修改原始的合约，指明哪一个新的比特币 UTXO，是最新的所有权控制者。
 
-<figure><img src=".gitbook/assets/bitcoin-based-single-use-seals.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/bitcoin-based-single-use-seals-zh.png" alt=""><figcaption></figcaption></figure>
 
 ### RGB 状态变更
 
@@ -48,7 +48,7 @@ RGB 利用了比特币区块链来**防止重复花费**，而且，这是通过
 
 为了让多次状态转换可以放进一个承诺中，状态转换的内容要被多次聚合：首先，跟某一个合约（或者说资产 ID）相关的所有状态转换，要确定性地聚合（成一个承诺）；然后，所有被转移的资产的承诺，要被聚合成一棵默克尔树，而最终的根哈希值，就是最终的 RGB 承诺。为了保证跟其它无关 RGB、但同样也需要使用确定性比特币承诺的协议的兼容性，RGB 承诺和其它协议的承诺要再一次聚合（如 [LNPBP-4 标准](https://github.com/LNP-BP/LNPBPs/blob/master/lnpbp-0004.md)所述），如此得到的哈希值，才是实际上被嵌入比特币交易中的消息。
 
-<figure><img src=".gitbook/assets/deterministic-bitcoin-commitments.webp" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/deterministic-bitcoin-commitments-zh.png" alt=""><figcaption></figcaption></figure>
 
 在最终的 LNPBP-4 消息就绪之后，有两种办法可以将其承诺到比特币交易中：
 
@@ -57,7 +57,7 @@ RGB 利用了比特币区块链来**防止重复花费**，而且，这是通过
 
 在多个承诺要插入比特币交易的情形中，只有第一个会跟 RGB 验证规则有关，其它都会被忽略，所以任何重复花费的尝试都是没有意义的。
 
-## 批处理
+### 批处理
 
 因为我们可以在单个比特币承诺中包含任意数量的状态转换，大规模的批处理也成为可能。例如，假设某人想同时给多人支付，他只需为每一个接收者创建一个状态转换，并将所有的状态转换都承诺到同一笔比特币交易中，就可以了，不需要占用更多字节。这意味着，每笔 RGB 支付的链上手续费边际成本都可以非常小，因为同一笔手续费被任意数量的转账平摊了。
 
@@ -96,7 +96,7 @@ txob1kewrvnf8sjmarq65gv98lz2xrgxylpnlta8lc3p78fjxaw9qda4qkewlwr
 
 为了达成一笔 RGB 转账，参与的客户端需要彼此分享一些数据。具体来说，发送者需要给接收者（们）分享 consignment，**这种数据结构包含了验证转账所需的一切信息**，包括可以追溯到合约创始状态的所有状态转换。
 
-RGB 协议不关心用于这种数据分享操作的通信渠道，而且这确实也可以用许多方式实现。虽然你信鸽来分享 consignment 也是可以的，但 RGB 软件已经实现了更实用的电子化信道。当前，在 RGB 软件中主要有两种分享数据的方法：
+RGB 协议不关心用于这种数据分享操作的通信渠道，而且这确实也可以用许多方式实现。虽然你用信鸽来分享 consignment 也是可以的，但 RGB 软件已经实现了更实用的电子化信道。当前，在 RGB 软件中主要有两种分享数据的方法：
 
 * [Storm](https://github.com/Storm-WG/storm-spec)：一种点对点的即时通信和存储系统，基于闪电网络。
 * [RGB 代理服务端](https://github.com/RGB-Tools/rgb-http-json-rpc)：一种标准化的 HTTP JSON-RPC 服务端，其客户端可以上传和下载数据。用户可以运行自己的代理服务端，也是使用第三方的服务端。依赖于第三方的服务端会影响隐私性和抗审查性，但不影响安全性。
